@@ -6,22 +6,38 @@ FROM continuumio/anaconda3:latest
 # plotly is required for fbprophet
 # requests, tabulate, colorama and future is required for h2o
 
+# conda install nodejs which is required for jupyterlab extensions
+RUN conda install nodejs
+
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir \
-    jupyterlab \
-    requests \
-    tabulate \
+    npm==0.1.1 \
+    jupyterlab==2.1.4 \
+    jupyterlab-git==0.20.0 \
+    requests==2.22.0 \
+    tabulate==0.8.7 \
     "colorama>=0.3.8" \
-    future \
+    future==0.18.2 \
     -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o \
     plotly==4.8.1 \
-    lightgbm \
-    xgboost \
-    catboost \
-    pyspark
+    lightgbm==2.3.1 \
+    xgboost==1.1.0 \
+    catboost==0.23.2 \
+    pyspark==2.4.6
+
+# run command to complete installation of jupyterlab-git
+RUN jupyter lab build
+
+# install jupyterlab extensions
+RUN jupyter labextension install jupyterlab-topbar-extension \
+                                 jupyterlab-system-monitor \
+                                 jupyterlab-topbar-text \
+                                 jupyterlab-logout \
+                                 jupyterlab-theme-toggle
+
 
 # doing conda installation for fbprophet as pip install is failing
-RUN conda install -c conda-forge fbprophet
+RUN conda install -c conda-forge fbprophet=0.6
 
 CMD [ "/bin/bash" ]
 CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
