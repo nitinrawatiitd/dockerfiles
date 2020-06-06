@@ -8,6 +8,7 @@ FROM continuumio/anaconda3:latest
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir \
+    jupyterlab \
     requests \
     tabulate \
     "colorama>=0.3.8" \
@@ -23,5 +24,5 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip && \
 RUN conda install -c conda-forge fbprophet
 
 CMD [ "/bin/bash" ]
-CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
 
