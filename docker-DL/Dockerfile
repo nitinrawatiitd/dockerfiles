@@ -16,16 +16,22 @@ RUN apt-get update --fix-missing && \
                    python3-pip && \
     rm -rf /var/lib/apt/lists
 
+# upgrade pip to latest version. version>19.0 required to install latest version of tensorflow
+RUN pip3 install -U pip
+
+# install Tensorflow
+RUN pip install --upgrade tensorflow
+
 # Add SNI support to Python
-RUN pip3 --no-cache-dir install \
+RUN pip --no-cache-dir install \
 		pyopenssl \
 		ndg-httpsclient \
 		pyasn1
 
 # Install useful Python packages using apt-get to avoid version incompatibilities with Tensorflow binary
 # especially numpy, scipy, skimage and sklearn (see https://github.com/tensorflow/tensorflow/issues/2034)
-RUN pip3 --no-cache-dir install \
-		numpy \
+RUN pip --no-cache-dir install \
+		numpy==1.16.6 \
 		scipy \
 		nose \
 		h5py \
@@ -42,14 +48,13 @@ RUN pip3 --no-cache-dir install \
     networkx
 
 # Install other useful Python packages using pip. Keras is now part of tensorflow
-RUN pip3 --no-cache-dir install --upgrade ipython && \
-	pip3 --no-cache-dir install \
+RUN pip --no-cache-dir install --upgrade ipython && \
+	pip --no-cache-dir install \
 		Cython \
 		ipykernel \
 		path.py \
     jupyterlab==2.1.4 \
     jupyterlab-git==0.20.0 \
-    tensorflow \
     mkl \
     torch \
     transformers
