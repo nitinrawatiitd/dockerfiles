@@ -8,8 +8,11 @@ RUN pip --no-cache-dir install \
 		python-dotenv \
     nltk>=3.4.5
 
+# widgets is required for progress bar for some of the downloads, specially pretrained embeddings
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
 # run this command to go the sharedfolder by default. pytorch-gpu image goes to a 'workspace' folder by default
-WORKDIR /
+# WORKDIR /
 
 CMD [ "/bin/bash" ]
 CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
