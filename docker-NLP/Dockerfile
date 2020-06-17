@@ -9,7 +9,7 @@ RUN pip --no-cache-dir install \
     nltk>=3.4.5
 
 # widgets is required for progress bar for some of the downloads, specially pretrained embeddings
-jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 # run this command to go the sharedfolder by default. pytorch-gpu image goes to a 'workspace' folder by default
 # WORKDIR /
