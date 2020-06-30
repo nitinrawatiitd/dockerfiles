@@ -33,7 +33,9 @@ RUN jupyter labextension install jupyterlab-topbar-extension \
                                  jupyterlab-system-monitor \
                                  jupyterlab-topbar-text \
                                  jupyterlab-logout \
-                                 jupyterlab-theme-toggle
+                                 jupyterlab-theme-toggle \
+                                 @jupyter-widgets/jupyterlab-manager \
+                                 @bokeh/jupyter_bokeh
 
 
 # doing conda installation for fbprophet as pip install is failing
@@ -41,4 +43,3 @@ RUN conda install -c conda-forge fbprophet=0.6
 
 CMD [ "/bin/bash" ]
 CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
-
