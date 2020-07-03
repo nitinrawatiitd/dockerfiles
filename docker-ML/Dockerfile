@@ -23,7 +23,8 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     lightgbm==2.3.1 \
     xgboost==1.1.0 \
     catboost==0.23.2 \
-    pyspark==2.4.6
+    pyspark==2.4.6 \
+    pyomo
 
 # run command to complete installation of jupyterlab-git
 RUN jupyter lab build
