@@ -26,7 +26,8 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     pyspark==2.4.6 \
     pyomo \
     xarray \
-    imbalanced-learn
+    imbalanced-learn \
+    hyperopt
 
 # run command to complete installation of jupyterlab-git
 RUN jupyter lab build
